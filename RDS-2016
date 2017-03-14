@@ -1,0 +1,1056 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_CB1_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_DC1_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_GW1_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_RDSH0_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_RDSH1_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "availabilitySets_cb_availabilityset_name": {
+            "defaultValue": "cb-availabilityset",
+            "type": "String"
+        },
+        "availabilitySets_gw_availabilityset_name": {
+            "defaultValue": "gw-availabilityset",
+            "type": "String"
+        },
+        "availabilitySets_rdsh_availabilityset_name": {
+            "defaultValue": "rdsh-availabilityset",
+            "type": "String"
+        },
+        "virtualMachines_CB1_name": {
+            "defaultValue": "CB1",
+            "type": "String"
+        },
+        "virtualMachines_DC1_name": {
+            "defaultValue": "DC1",
+            "type": "String"
+        },
+        "virtualMachines_GW1_name": {
+            "defaultValue": "GW1",
+            "type": "String"
+        },
+        "virtualMachines_RDSH0_name": {
+            "defaultValue": "RDSH0",
+            "type": "String"
+        },
+        "virtualMachines_RDSH1_name": {
+            "defaultValue": "RDSH1",
+            "type": "String"
+        },
+        "loadBalancers_ADPLBRDS_2016_name": {
+            "defaultValue": "ADPLBRDS-2016",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_name": {
+            "defaultValue": "GWPLBRDS-2016",
+            "type": "String"
+        },
+        "networkInterfaces_ADNicRDS_2016_name": {
+            "defaultValue": "ADNicRDS-2016",
+            "type": "String"
+        },
+        "networkInterfaces_cb_nic_name": {
+            "defaultValue": "cb-nic",
+            "type": "String"
+        },
+        "networkInterfaces_gw_nic_name": {
+            "defaultValue": "gw-nic",
+            "type": "String"
+        },
+        "networkInterfaces_rdsh_0_nic_name": {
+            "defaultValue": "rdsh-0-nic",
+            "type": "String"
+        },
+        "networkInterfaces_rdsh_1_nic_name": {
+            "defaultValue": "rdsh-1-nic",
+            "type": "String"
+        },
+        "networkSecurityGroups_RDSNsg_name": {
+            "defaultValue": "RDSNsg",
+            "type": "String"
+        },
+        "publicIPAddresses_adpipvgtejaj2zrqlu_name": {
+            "defaultValue": "adpipvgtejaj2zrqlu",
+            "type": "String"
+        },
+        "publicIPAddresses_gwpip_name": {
+            "defaultValue": "gwpip",
+            "type": "String"
+        },
+        "virtualNetworks_ADVNETRDS_2016_name": {
+            "defaultValue": "ADVNETRDS-2016",
+            "type": "String"
+        },
+        "storageAccounts_adsavgtejaj2zrqlu_name": {
+            "defaultValue": "adsavgtejaj2zrqlu",
+            "type": "String"
+        },
+        "storageAccounts_rdsavgtejaj2zrqlu_name": {
+            "defaultValue": "rdsavgtejaj2zrqlu",
+            "type": "String"
+        },
+        "extensions_rdsdeployment_name": {
+            "defaultValue": "CB1/rdsdeployment",
+            "type": "String"
+        },
+        "extensions_InstallDomainController_name": {
+            "defaultValue": "DC1/InstallDomainController",
+            "type": "String"
+        },
+        "extensions_gateway_name": {
+            "defaultValue": "GW1/gateway",
+            "type": "String"
+        },
+        "extensions_sessionhost_name": {
+            "defaultValue": "RDSH0/sessionhost",
+            "type": "String"
+        },
+        "extensions_sessionhost_name_1": {
+            "defaultValue": "RDSH1/sessionhost",
+            "type": "String"
+        },
+        "loadBalancers_ADPLBRDS_2016_id": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/ADPLBRDS-2016/frontendIPConfigurations/ADLBFE",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/frontendIPConfigurations/GWLBFE",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_1": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/backendAddressPools/GWLBBE",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_2": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/probes/tcpProbe",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_3": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/frontendIPConfigurations/GWLBFE",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_4": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/backendAddressPools/GWLBBE",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_5": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/probes/tcpProbe",
+            "type": "String"
+        },
+        "loadBalancers_GWPLBRDS_2016_id_6": {
+            "defaultValue": "/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016/frontendIPConfigurations/GWLBFE",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/availabilitySets/cb-availabilityset'.",
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('availabilitySets_cb_availabilityset_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "platformUpdateDomainCount": 5,
+                "platformFaultDomainCount": 3
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/availabilitySets/gw-availabilityset'.",
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('availabilitySets_gw_availabilityset_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "platformUpdateDomainCount": 5,
+                "platformFaultDomainCount": 3
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/availabilitySets/rdsh-availabilityset'.",
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('availabilitySets_rdsh_availabilityset_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "platformUpdateDomainCount": 5,
+                "platformFaultDomainCount": 3
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/CB1'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_CB1_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_cb_availabilityset_name'))]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "Basic_A1"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "osdisk",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'), '.blob.core.windows.net', '/scvgtejaj2zrqlu/cb-vm-os-disk.vhd')]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_CB1_name')]",
+                    "adminUsername": "RDSAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_CB1_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cb_nic_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_cb_availabilityset_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cb_nic_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/DC1'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_DC1_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Basic_A1"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "osdisk",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_adsavgtejaj2zrqlu_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_DC1_name'),'0-osdisk.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('virtualMachines_DC1_name'),'0-data-disk1')]",
+                            "createOption": "Empty",
+                            "vhd": {
+                                "uri": "[concat('https', '://', parameters('storageAccounts_adsavgtejaj2zrqlu_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_DC1_name'),'0data-1.vhd'))]"
+                            },
+                            "caching": "None",
+                            "diskSizeGB": 2
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_DC1_name')]",
+                    "adminUsername": "RDSAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_DC1_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_ADNicRDS_2016_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_adsavgtejaj2zrqlu_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_ADNicRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/GW1'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_GW1_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_gw_availabilityset_name'))]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_A1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "osdisk",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'), '.blob.core.windows.net', '/scvgtejaj2zrqlu/gw-vm-os-disk.vhd')]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_GW1_name')]",
+                    "adminUsername": "RDSAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_GW1_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_gw_nic_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_gw_availabilityset_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_gw_nic_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/RDSH0'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_RDSH0_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_rdsh_availabilityset_name'))]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "Basic_A1"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "osdisk",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'), '.blob.core.windows.net', '/scvgtejaj2zrqlu/rdsh-0-os-disk.vhd')]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_RDSH0_name')]",
+                    "adminUsername": "RDSAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_RDSH0_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rdsh_0_nic_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_rdsh_availabilityset_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rdsh_0_nic_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/RDSH1'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_RDSH1_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_rdsh_availabilityset_name'))]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "Basic_A1"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "osdisk",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'), '.blob.core.windows.net', '/scvgtejaj2zrqlu/rdsh-1-os-disk.vhd')]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_RDSH1_name')]",
+                    "adminUsername": "RDSAdmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_RDSH1_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rdsh_1_nic_name'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySets_rdsh_availabilityset_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rdsavgtejaj2zrqlu_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rdsh_1_nic_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/ADPLBRDS-2016'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "[parameters('loadBalancers_ADPLBRDS_2016_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "ADLBFE",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_adpipvgtejaj2zrqlu_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "ADLBBE"
+                    }
+                ],
+                "loadBalancingRules": [],
+                "probes": [],
+                "inboundNatRules": [
+                    {
+                        "name": "ADRDPNAT",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_ADPLBRDS_2016_id')]"
+                            },
+                            "frontendPort": 3389,
+                            "backendPort": 3389,
+                            "protocol": "Tcp"
+                        }
+                    }
+                ],
+                "outboundNatRules": [],
+                "inboundNatPools": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_adpipvgtejaj2zrqlu_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/loadBalancers/GWPLBRDS-2016'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "[parameters('loadBalancers_GWPLBRDS_2016_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "GWLBFE",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_gwpip_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "GWLBBE"
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "LBRule01",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id')]"
+                            },
+                            "frontendPort": 443,
+                            "backendPort": 443,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "protocol": "Tcp",
+                            "loadDistribution": "SourceIPProtocol",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_1')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_2')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "LBRule02",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_3')]"
+                            },
+                            "frontendPort": 3391,
+                            "backendPort": 3391,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "protocol": "Udp",
+                            "loadDistribution": "SourceIPProtocol",
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_4')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_5')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "tcpProbe",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 443,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    },
+                    {
+                        "name": "tcpProbe01",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 3391,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "inboundNatRules": [
+                    {
+                        "name": "rdp",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_GWPLBRDS_2016_id_6')]"
+                            },
+                            "frontendPort": 3389,
+                            "backendPort": 3389,
+                            "protocol": "Tcp"
+                        }
+                    }
+                ],
+                "outboundNatRules": [],
+                "inboundNatPools": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_gwpip_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkInterfaces/ADNicRDS-2016'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_ADNicRDS_2016_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name')), '/subnets/ADStaticSubnetRDS-2016')]"
+                            },
+                            "loadBalancerInboundNatRules": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_ADPLBRDS_2016_name')), '/inboundNatRules/ADRDPNAT')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name'))]",
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_ADPLBRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkInterfaces/cb-nic'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_cb_nic_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.7",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name')), '/subnets/ADStaticSubnetRDS-2016')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.0.4"
+                    ]
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkInterfaces/gw-nic'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_gw_nic_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.8",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name')), '/subnets/ADStaticSubnetRDS-2016')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_GWPLBRDS_2016_name')), '/backendAddressPools/GWLBBE')]"
+                                }
+                            ],
+                            "loadBalancerInboundNatRules": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_GWPLBRDS_2016_name')), '/inboundNatRules/rdp')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.0.4"
+                    ]
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name'))]",
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_GWPLBRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkInterfaces/rdsh-0-nic'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_rdsh_0_nic_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.6",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name')), '/subnets/ADStaticSubnetRDS-2016')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.0.4"
+                    ]
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkInterfaces/rdsh-1-nic'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_rdsh_1_nic_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name')), '/subnets/ADStaticSubnetRDS-2016')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.0.4"
+                    ]
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_ADVNETRDS_2016_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/networkSecurityGroups/RDSNsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_RDSNsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "rule1",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 101,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/publicIPAddresses/adpipvgtejaj2zrqlu'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_adpipvgtejaj2zrqlu_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "adnsrds-2016"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/publicIPAddresses/gwpip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_gwpip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "rds-2016"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Network/virtualNetworks/ADVNETRDS-2016'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_ADVNETRDS_2016_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": [
+                        "10.0.0.4"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "ADStaticSubnetRDS-2016",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_RDSNsg_name'))]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_RDSNsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/rds-2016/providers/Microsoft.Storage/storageAccounts/adsavgtejaj2zrqlu'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_adsavgtejaj2zrqlu_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "westeurope",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/rds-2016/providers/Microsoft.Storage/storageAccounts/rdsavgtejaj2zrqlu'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_rdsavgtejaj2zrqlu_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "westeurope",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/CB1/extensions/rdsdeployment'.",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[parameters('extensions_rdsdeployment_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.11",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "modulesUrl": "https://raw.githubusercontent.com/Azure/azure-QuickStart-Templates/master/rds-deployment//Configuration.zip",
+                    "configurationFunction": "Configuration.ps1\\RDSDeployment",
+                    "Properties": {
+                        "adminCreds": {
+                            "UserName": "RDSAdmin",
+                            "Password": "PrivateSettingsRef:adminPassword"
+                        },
+                        "connectionBroker": "CB1.rds-2016.local",
+                        "domainName": "rds-2016.local",
+                        "externalfqdn": "rds-2016.westeurope.cloudapp.azure.com",
+                        "numberOfRdshInstances": 2,
+                        "sessionHostNamingPrefix": "RDSH",
+                        "webAccessServer": "GW1.rds-2016.local"
+                    }
+                },
+                "protectedSettings": {}
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_CB1_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/DC1/extensions/InstallDomainController'.",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[parameters('extensions_InstallDomainController_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.8",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "modulesUrl": "https://raw.githubusercontent.com/thecloudplatform/azure/master/CreateADPDC.ps1.zip",
+                    "configurationFunction": "CreateADPDC.ps1\\CreateADPDC",
+                    "properties": {
+                        "domainName": "rds-2016.local",
+                        "adminCreds": {
+                            "userName": "RDSAdmin",
+                            "password": "PrivateSettingsRef:adminPassword"
+                        }
+                    }
+                },
+                "protectedSettings": {}
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_DC1_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/GW1/extensions/gateway'.",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[parameters('extensions_gateway_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.11",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "modulesUrl": "https://raw.githubusercontent.com/Azure/azure-QuickStart-Templates/master/rds-deployment//Configuration.zip",
+                    "configurationFunction": "Configuration.ps1\\Gateway",
+                    "Properties": {
+                        "DomainName": "rds-2016.local",
+                        "AdminCreds": {
+                            "UserName": "RDSAdmin",
+                            "Password": "PrivateSettingsRef:AdminPassword"
+                        }
+                    }
+                },
+                "protectedSettings": {}
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_GW1_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/RDSH0/extensions/sessionhost'.",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[parameters('extensions_sessionhost_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.11",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "ModulesUrl": "https://raw.githubusercontent.com/Azure/azure-QuickStart-Templates/master/rds-deployment//Configuration.zip",
+                    "ConfigurationFunction": "Configuration.ps1\\SessionHost",
+                    "Properties": {
+                        "DomainName": "rds-2016.local",
+                        "AdminCreds": {
+                            "UserName": "RDSAdmin",
+                            "Password": "PrivateSettingsRef:AdminPassword"
+                        }
+                    }
+                },
+                "protectedSettings": {}
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_RDSH0_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/6f02be33-5377-41d0-8476-25f2837e59cb/resourceGroups/RDS-2016/providers/Microsoft.Compute/virtualMachines/RDSH1/extensions/sessionhost'.",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[parameters('extensions_sessionhost_name_1')]",
+            "apiVersion": "2016-03-30",
+            "location": "westeurope",
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.11",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "ModulesUrl": "https://raw.githubusercontent.com/Azure/azure-QuickStart-Templates/master/rds-deployment//Configuration.zip",
+                    "ConfigurationFunction": "Configuration.ps1\\SessionHost",
+                    "Properties": {
+                        "DomainName": "rds-2016.local",
+                        "AdminCreds": {
+                            "UserName": "RDSAdmin",
+                            "Password": "PrivateSettingsRef:AdminPassword"
+                        }
+                    }
+                },
+                "protectedSettings": {}
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_RDSH1_name'))]"
+            ]
+        }
+    ]
+}
