@@ -1,1 +1,1 @@
-Blank TemplateThis is an empty template, with the schema reference and top-level properties defined.
+Azure Templates for creates Resource Group in Azure, this will create Windows 2016 Server
